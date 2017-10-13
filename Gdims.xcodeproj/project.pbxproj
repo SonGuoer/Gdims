@@ -13,6 +13,12 @@
 		68755B221F904F4C00898284 /* Gdims.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68755B201F904F4C00898284 /* Gdims.xcdatamodeld */; };
 		68755B241F904F4C00898284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68755B231F904F4C00898284 /* Assets.xcassets */; };
 		68755B271F904F4D00898284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68755B251F904F4D00898284 /* LaunchScreen.storyboard */; };
+		A0F10FD81F9066CD00732A12 /* InfoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FD71F9066CD00732A12 /* InfoRealm.swift */; };
+		A0F10FDA1F9066F200732A12 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FD91F9066F200732A12 /* InfoModel.swift */; };
+		A0F10FDC1F90671500732A12 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FDB1F90671500732A12 /* BaseModel.swift */; };
+		A0F10FDE1F90674C00732A12 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FDD1F90674C00732A12 /* Api.swift */; };
+		A0F10FE01F90677300732A12 /* UserDefaultUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FDF1F90677300732A12 /* UserDefaultUtils.swift */; };
+		A0F10FE21F9067BF00732A12 /* HomepageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FE11F9067BF00732A12 /* HomepageView.swift */; };
 		A805A05EA75E682FEA42A6C7 /* Pods_Gdims.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3D7687F20D94359096A346 /* Pods_Gdims.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +34,12 @@
 		68755B261F904F4D00898284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68755B281F904F4D00898284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F3D7687F20D94359096A346 /* Pods_Gdims.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gdims.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0F10FD71F9066CD00732A12 /* InfoRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRealm.swift; sourceTree = "<group>"; };
+		A0F10FD91F9066F200732A12 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
+		A0F10FDB1F90671500732A12 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		A0F10FDD1F90674C00732A12 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		A0F10FDF1F90677300732A12 /* UserDefaultUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultUtils.swift; sourceTree = "<group>"; };
+		A0F10FE11F9067BF00732A12 /* HomepageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +92,9 @@
 		68755B181F904F4C00898284 /* Gdims */ = {
 			isa = PBXGroup;
 			children = (
+				A0F10FD51F90669F00732A12 /* view */,
+				A0F10FD61F9066AB00732A12 /* utils */,
+				A0F10FD41F90667300732A12 /* model */,
 				68755B191F904F4C00898284 /* AppDelegate.swift */,
 				68755B1B1F904F4C00898284 /* ViewController.swift */,
 				68755B1D1F904F4C00898284 /* Main.storyboard */,
@@ -89,6 +104,33 @@
 				68755B201F904F4C00898284 /* Gdims.xcdatamodeld */,
 			);
 			path = Gdims;
+			sourceTree = "<group>";
+		};
+		A0F10FD41F90667300732A12 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A0F10FD71F9066CD00732A12 /* InfoRealm.swift */,
+				A0F10FD91F9066F200732A12 /* InfoModel.swift */,
+				A0F10FDB1F90671500732A12 /* BaseModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		A0F10FD51F90669F00732A12 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				A0F10FE11F9067BF00732A12 /* HomepageView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		A0F10FD61F9066AB00732A12 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				A0F10FDD1F90674C00732A12 /* Api.swift */,
+				A0F10FDF1F90677300732A12 /* UserDefaultUtils.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +274,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F10FE21F9067BF00732A12 /* HomepageView.swift in Sources */,
+				A0F10FDC1F90671500732A12 /* BaseModel.swift in Sources */,
+				A0F10FDA1F9066F200732A12 /* InfoModel.swift in Sources */,
 				68755B1C1F904F4C00898284 /* ViewController.swift in Sources */,
 				68755B221F904F4C00898284 /* Gdims.xcdatamodeld in Sources */,
 				68755B1A1F904F4C00898284 /* AppDelegate.swift in Sources */,
+				A0F10FDE1F90674C00732A12 /* Api.swift in Sources */,
+				A0F10FE01F90677300732A12 /* UserDefaultUtils.swift in Sources */,
+				A0F10FD81F9066CD00732A12 /* InfoRealm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4X75YXM4C3;
+				DEVELOPMENT_TEAM = 2XFLGNB63J;
 				INFOPLIST_FILE = Gdims/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nandi.Gdims;
@@ -389,7 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4X75YXM4C3;
+				DEVELOPMENT_TEAM = 2XFLGNB63J;
 				INFOPLIST_FILE = Gdims/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nandi.Gdims;
