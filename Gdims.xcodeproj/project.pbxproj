@@ -13,9 +13,12 @@
 		68755B221F904F4C00898284 /* Gdims.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68755B201F904F4C00898284 /* Gdims.xcdatamodeld */; };
 		68755B241F904F4C00898284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68755B231F904F4C00898284 /* Assets.xcassets */; };
 		68755B271F904F4D00898284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68755B251F904F4D00898284 /* LaunchScreen.storyboard */; };
+		A805A05EA75E682FEA42A6C7 /* Pods_Gdims.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3D7687F20D94359096A346 /* Pods_Gdims.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1CCECCEC1803E61786B8B4BA /* Pods-Gdims.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gdims.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gdims/Pods-Gdims.debug.xcconfig"; sourceTree = "<group>"; };
+		64D376D776F5A7C86817B200 /* Pods-Gdims.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gdims.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gdims/Pods-Gdims.release.xcconfig"; sourceTree = "<group>"; };
 		68755B161F904F4C00898284 /* Gdims.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gdims.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68755B191F904F4C00898284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68755B1B1F904F4C00898284 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		68755B231F904F4C00898284 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68755B261F904F4D00898284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68755B281F904F4D00898284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F3D7687F20D94359096A346 /* Pods_Gdims.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gdims.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A805A05EA75E682FEA42A6C7 /* Pods_Gdims.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01B08684BF4410750670AF55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F3D7687F20D94359096A346 /* Pods_Gdims.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A950FFDB71C9DA965B82B19 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1CCECCEC1803E61786B8B4BA /* Pods-Gdims.debug.xcconfig */,
+				64D376D776F5A7C86817B200 /* Pods-Gdims.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		68755B0D1F904F4C00898284 = {
 			isa = PBXGroup;
 			children = (
 				68755B181F904F4C00898284 /* Gdims */,
 				68755B171F904F4C00898284 /* Products */,
+				1A950FFDB71C9DA965B82B19 /* Pods */,
+				01B08684BF4410750670AF55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68755B2B1F904F4D00898284 /* Build configuration list for PBXNativeTarget "Gdims" */;
 			buildPhases = (
+				D669724D15961AE915773642 /* [CP] Check Pods Manifest.lock */,
 				68755B121F904F4C00898284 /* Sources */,
 				68755B131F904F4C00898284 /* Frameworks */,
 				68755B141F904F4C00898284 /* Resources */,
+				AE549C71632825A03FA0DB24 /* [CP] Embed Pods Frameworks */,
+				5D7C22B1C16537F4A9B10331 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,6 +160,72 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5D7C22B1C16537F4A9B10331 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gdims/Pods-Gdims-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE549C71632825A03FA0DB24 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Gdims/Pods-Gdims-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper+Realm/ObjectMapper_Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper_Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gdims/Pods-Gdims-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D669724D15961AE915773642 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gdims-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		68755B121F904F4C00898284 /* Sources */ = {
@@ -276,6 +369,7 @@
 		};
 		68755B2C1F904F4D00898284 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CCECCEC1803E61786B8B4BA /* Pods-Gdims.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -291,6 +385,7 @@
 		};
 		68755B2D1F904F4D00898284 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64D376D776F5A7C86817B200 /* Pods-Gdims.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
