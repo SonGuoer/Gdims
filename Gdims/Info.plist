@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>12</string>
+	<string>允许使用前台定位</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>123</string>
+	<string>允许使用后台定位</string>
 	<key>NSLocationUsageDescription</key>
-	<string>21313</string>
+	<string>允许使用定位</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
