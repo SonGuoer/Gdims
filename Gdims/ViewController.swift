@@ -130,22 +130,36 @@ class ViewController: UIViewController {
         phoneInput.resignFirstResponder()
     }
     
-    //     func macroRequst()  {
-    //            url = "http://183.230.108.112:8099/meteor/findMonitor.do?mobile=15702310784&&imei=0"
-    //            Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
-    //                let myResponse = response.result.value
-    //                print(myResponse!.info!)
-    //                let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
-    //                let realm = try! Realm()
-    //                try! realm.write {
-    //                    for forecast in extractedExpr! {
-    //                    realm.create(InfoRealm.self, value: forecast, update: true)
-    //
-    //                    }
-    //               }
-    //                print("数据库路径: \(realm.configuration.fileURL)")
-    //            }
-    //        }
+    private func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        //键盘收回，view放下
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.frame.origin.y = 0
+        })
+        return true
+    }
+    func textFieldDidBeginEditing(textView:UITextField) {
+        //view弹起跟随键盘，高可根据自己定义
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.frame.origin.y = -150
+        })
+    }
+         func macroRequst()  {
+                url = "http://183.230.108.112:8099/meteor/findMonitor.do?mobile=15702310784&&imei=0"
+                Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
+                    let myResponse = response.result.value
+                    print(myResponse!.info!)
+                    let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
+                    let realm = try! Realm()
+                    try! realm.write {
+                        for forecast in extractedExpr! {
+                        realm.create(InfoRealm.self, value: forecast, update: true)
+    
+                        }
+                   }
+                    print("数据库路径: \(realm.configuration.fileURL)")
+                }
+            }
     
 }
 

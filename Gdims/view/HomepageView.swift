@@ -7,14 +7,29 @@
 //
 
 import UIKit
-
-class HomepageView: UIViewController {
+import CoreLocation
+class HomepageView: UIViewController,CLLocationManagerDelegate  {
+    @IBOutlet weak var gpsDate: UILabel!
     
+    @IBOutlet weak var location: UIView!
+    @IBOutlet weak var gdims: UIView!
+    @IBOutlet weak var callPhone: UIView!
+    //定位管理器
+    let locationManager:CLLocationManager = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusBarBackgroundColor(color: .black)
+        callPhone.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction))
+        tapGesture.numberOfTapsRequired = 1
+        callPhone.addGestureRecognizer(tapGesture)
+        location.isUserInteractionEnabled = true
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction2))
+        tapGesture.numberOfTapsRequired = 1
+        location.addGestureRecognizer(tapGesture2)
     }
-    
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,6 +49,48 @@ class HomepageView: UIViewController {
         }
     }
     
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        locationManager.stopUpdatingLocation()
+        
+        let location:CLLocation = locations[0]
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        
+        let geocoder = CLGeocoder()
+        
+        let location1 = CLLocation(latitude: latitude, longitude: longitude)
+        geocoder.reverseGeocodeLocation(location1){ (placeMarks:[CLPlacemark]?, error:Error?) ->Void in
+            if (placeMarks?.count)! > 0
+            {
+                let placeMark = placeMarks?.first
+                print("地名：\(placeMark!.name!) 经度：\(longitude) 纬度：\(latitude)")
+                self.gpsDate.text = "地名：\(placeMark!.name!) "
+            }
+        }
+    }
 }
+//MARK: 点击事件
+extension HomepageView{
+    
+    @objc fileprivate func tapGestureAction(){
+      UIApplication.shared.openURL(URL(string: "telprompt://10086")!)
+    }
+    @objc fileprivate func tapGestureAction2(){
+        //设置定位服务管理器代理
+        locationManager.delegate = self
+        //设置定位进度
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //更新距离
+        locationManager.distanceFilter = 10
+        ////发送授权申请
+        locationManager.requestAlwaysAuthorization()
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            //允许使用定位服务的话，开启定位服务更新
+            locationManager.startUpdatingLocation()
+            print("定位开始")
+        }
 
+    }
+}
