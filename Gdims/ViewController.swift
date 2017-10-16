@@ -12,7 +12,10 @@ import Alamofire
 import ObjectMapper
 import Toast_Swift
 import RealmSwift
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController {
+    @IBOutlet weak var ipView: UIView!
+    @IBOutlet weak var portView: UIView!
+    @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var ipInput: UITextField!
     @IBOutlet weak var portInput: UITextField!
     @IBOutlet weak var phoneInput: UITextField!
@@ -30,6 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         style.messageColor = .blue
         ipInput.delegate = self
         portInput.delegate = self
+        phoneInput.delegate = self
         if ((userDefault.getUser(forKey: "isSave") as String!) != nil) {
             self.ipInput.text = userDefault.getUser(forKey: "ips")
             self.portInput.text = userDefault.getUser(forKey: "ports")
@@ -120,17 +124,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     /*
-     回收系统键盘
-     */
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    /*
      点击空白处收起keyboard
      */
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         phoneInput.resignFirstResponder()
     }
     
@@ -150,5 +146,47 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //                print("数据库路径: \(realm.configuration.fileURL)")
     //            }
     //        }
+    
+}
+
+extension ViewController: UITextFieldDelegate {
+    /*
+     回收系统键盘
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.frame.origin.y = 0
+        })
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let ipframe = ipView.frame
+        let portframe = portView.frame
+        let phoneframe = phoneView.frame
+        /*
+         35:键盘上tabbar高度
+         52:两个textField之间的距离
+         42:textField的高度
+         */
+        if textField.isEqual(ipInput) {
+            UIView.animate(withDuration: 0.4, animations: {
+                //            self.view.frame.origin.y = -100
+                self.ipView.frame.origin.y = ipframe.origin.y - 35
+            })
+        } else if textField.isEqual(portInput) {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.ipView.frame.origin.y = ipframe.origin.y - 35 - 52
+                self.portView.frame.origin.y = portframe.origin.y - 35 - 52
+            })
+        } else if textField.isEqual(phoneInput) {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.ipView.frame.origin.y = ipframe.origin.y - 52 - 42
+                self.portView.frame.origin.y = portframe.origin.y - 52  - 42
+                self.phoneView.frame.origin.y = phoneframe.origin.y - 52 - 42
+            })
+        }
+    }
     
 }
