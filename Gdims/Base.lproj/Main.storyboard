@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -506,6 +507,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sGV-La-GgG"/>
                     </view>
+                    <connections>
+                        <outlet property="callPhone" destination="7O1-iU-D2L" id="nJL-oZ-JlZ"/>
+                        <outlet property="gdims" destination="r6i-B1-oeC" id="PYj-7C-NpG"/>
+                        <outlet property="gpsDate" destination="8vW-aA-lzF" id="vtV-gg-mW8"/>
+                        <outlet property="location" destination="OiY-va-KWJ" id="t6E-UC-wpX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZaZ-fO-zm6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
