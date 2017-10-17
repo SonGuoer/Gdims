@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.portInput.text = userDefault.getUser(forKey: "ports")
             self.phoneInput.text = userDefault.getUser(forKey: "phoneNum")
         }
-        // macroRequst()
+         macroRequst()
     }
     
     override func didReceiveMemoryWarning() {
@@ -148,14 +148,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     let myResponse = response.result.value
                     print(myResponse!.info!)
                     let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
-                    let realm = try! Realm()
-                    try! realm.write {
+                   
+                    print( extractedExpr?.count)
+//                    let realm = try! Realm()
+//                    try! realm.write {
                         for forecast in extractedExpr! {
-                        realm.create(InfoRealm.self, value: forecast, update: true)
-    
+//                        realm.create(InfoRealm.self, value: forecast, update: true)
+                            if forecast.unifiedNumber == "5001010000520201"{
+                                print( forecast.monPointName!)
+                            }
                         }
-                   }
-                    print("数据库路径: \(realm.configuration.fileURL)")
+//                   }
+//                    print("数据库路径: \(realm.configuration.fileURL)")
                 }
             }
     
