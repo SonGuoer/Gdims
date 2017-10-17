@@ -12,7 +12,7 @@ import Alamofire
 import ObjectMapper
 import Toast_Swift
 import RealmSwift
-
+import CoreData
 class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     var myTableView: UITableView?
@@ -20,7 +20,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     let Sheight = UIScreen.main.bounds.size.height
     var clickNum:Int?
     var getClickNum:Int?
-    
+    var array = [String]()
     var url = ""
     
     override func viewDidLoad() {
@@ -31,17 +31,47 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         self.myTableView!.dataSource = self
         self.myTableView!.tableFooterView = UIView()
         self.view.addSubview(self.myTableView!)
-        macroRequest()
+//        macroRequest()
         monitorRequst()
     }
-    
-    /*
-     灾害点请求
-     */
-    func macroRequest() {
-        url = "http://183.230.108.112:8099/meteor/findMacro.do"
+    private func saveName(text: String) {
+        //        步骤一：获取总代理和托管对象总管
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let managedObectContext = appDelegate.persistentContainer.viewContext
+        
+        //        步骤二：建立一个entity
+        let entity = NSEntityDescription.entity(forEntityName: "Monitor", in: managedObectContext)
+        
+        let person = NSManagedObject(entity: entity!, insertInto: managedObectContext)
+        
+        //        步骤三：保存文本框中的值到person
+        person.setValue(text, forKey: "monPointName")
+        
+        //        步骤四：保存entity到托管对象中。如果保存失败，进行处理
+        do {
+            try managedObectContext.save()
+            print("保存成功")
+        } catch  {
+            fatalError("无法保存")
+        }
+        
+
+        
+        //        步骤二：建立一个获取的请求
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Monitor")
+        
+        //        步骤三：执行请求
+        do {
+            let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Monitor]
+            print(fetchedResults)
+            for one in fetchedResults! {
+             print(one.monPointName)
+            }
+        } catch  {
+            fatalError("获取失败")
+        }
     }
-    
     /*
      灾害点的监测点请求
      */
@@ -49,15 +79,14 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         url = "http://183.230.108.112:8099/meteor/findMonitor.do?mobile=15702310784&&imei=0"
         Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
             let myResponse = response.result.value
-            print(myResponse!.info!)
+//            print(myResponse!.info!)
             let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
-            //let realm = try! Realm()
-            //try! realm.write {
+            
             for forecast in extractedExpr! {
                 //realm.create(InfoRealm.self, value: forecast, update: true)
-                print(forecast.monPointName!)
-                
+                self.saveName(text: forecast.monPointName!)
             }
+        
             //}
             //print("数据库路径: \(realm.configuration.fileURL)")
         }

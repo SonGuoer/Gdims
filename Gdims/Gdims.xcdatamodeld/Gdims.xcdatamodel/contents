@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Monitor" representedClassName="Monitor" syncable="YES" codeGenerationType="class">
+        <attribute name="dimension" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="instrumentConstant" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="instrumentNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="legalR" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="monAngle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="monContent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="monDirection" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="monPointLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="monPointName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="monPointNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="monType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unifiedNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="xpoint" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ypoint" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Monitor" positionX="-63" positionY="-18" width="128" height="30"/>
+    </elements>
 </model>
