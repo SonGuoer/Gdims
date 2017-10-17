@@ -12,7 +12,7 @@ import Alamofire
 import ObjectMapper
 import Toast_Swift
 import RealmSwift
-
+import CoreData
 class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     var myTableView: UITableView?
@@ -63,7 +63,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
         
     }
-    
     /*
      灾害点的监测点请求
      */
@@ -71,15 +70,14 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         url = "http://183.230.108.112:8099/meteor/findMonitor.do?mobile=15702310784&&imei=0"
         Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
             let myResponse = response.result.value
-            print(myResponse!.info!)
+//            print(myResponse!.info!)
             let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
-            //let realm = try! Realm()
-            //try! realm.write {
+            
             for forecast in extractedExpr! {
                 //realm.create(InfoRealm.self, value: forecast, update: true)
-                print(forecast.monPointName!)
-                
+                self.saveName(text: forecast.monPointName!)
             }
+        
             //}
             //print("数据库路径: \(realm.configuration.fileURL)")
         }
