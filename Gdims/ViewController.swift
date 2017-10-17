@@ -12,7 +12,10 @@ import Alamofire
 import ObjectMapper
 import Toast_Swift
 import RealmSwift
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController {
+    @IBOutlet weak var ipView: UIView!
+    @IBOutlet weak var portView: UIView!
+    @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var ipInput: UITextField!
     @IBOutlet weak var portInput: UITextField!
     @IBOutlet weak var phoneInput: UITextField!
@@ -30,6 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         style.messageColor = .blue
         ipInput.delegate = self
         portInput.delegate = self
+        phoneInput.delegate = self
         if ((userDefault.getUser(forKey: "isSave") as String!) != nil) {
             self.ipInput.text = userDefault.getUser(forKey: "ips")
             self.portInput.text = userDefault.getUser(forKey: "ports")
@@ -119,18 +123,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-
-    
     /*
      点击空白处收起keyboard
      */
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         phoneInput.resignFirstResponder()
     }
     
-    private func textFieldShouldReturn(textField: UITextField) -> Bool {
+}
+
+extension ViewController: UITextFieldDelegate {
+    /*
+     回收系统键盘
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        //键盘收回，view放下
         UIView.animate(withDuration: 0.4, animations: {
             self.view.frame.origin.y = 0
         })

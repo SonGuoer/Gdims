@@ -13,6 +13,9 @@
 		68755B221F904F4C00898284 /* Gdims.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68755B201F904F4C00898284 /* Gdims.xcdatamodeld */; };
 		68755B241F904F4C00898284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68755B231F904F4C00898284 /* Assets.xcassets */; };
 		68755B271F904F4D00898284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68755B251F904F4D00898284 /* LaunchScreen.storyboard */; };
+		A025761E1F95B7B800539A16 /* MacroInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025761D1F95B7B800539A16 /* MacroInfoModel.swift */; };
+		A03DBEA51F94A86000F2540C /* DisasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03DBEA41F94A86000F2540C /* DisasterView.swift */; };
+		A03DBEA71F94ABB900F2540C /* QuantityMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03DBEA61F94ABB900F2540C /* QuantityMonitorView.swift */; };
 		A0F10FD81F9066CD00732A12 /* InfoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FD71F9066CD00732A12 /* InfoRealm.swift */; };
 		A0F10FDA1F9066F200732A12 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FD91F9066F200732A12 /* InfoModel.swift */; };
 		A0F10FDC1F90671500732A12 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FDB1F90671500732A12 /* BaseModel.swift */; };
@@ -34,6 +37,9 @@
 		68755B261F904F4D00898284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68755B281F904F4D00898284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F3D7687F20D94359096A346 /* Pods_Gdims.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gdims.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A025761D1F95B7B800539A16 /* MacroInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroInfoModel.swift; sourceTree = "<group>"; };
+		A03DBEA41F94A86000F2540C /* DisasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisasterView.swift; sourceTree = "<group>"; };
+		A03DBEA61F94ABB900F2540C /* QuantityMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityMonitorView.swift; sourceTree = "<group>"; };
 		A0F10FD71F9066CD00732A12 /* InfoRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRealm.swift; sourceTree = "<group>"; };
 		A0F10FD91F9066F200732A12 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		A0F10FDB1F90671500732A12 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
@@ -112,6 +118,7 @@
 				A0F10FD71F9066CD00732A12 /* InfoRealm.swift */,
 				A0F10FD91F9066F200732A12 /* InfoModel.swift */,
 				A0F10FDB1F90671500732A12 /* BaseModel.swift */,
+				A025761D1F95B7B800539A16 /* MacroInfoModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -120,6 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				A0F10FE11F9067BF00732A12 /* HomepageView.swift */,
+				A03DBEA41F94A86000F2540C /* DisasterView.swift */,
+				A03DBEA61F94ABB900F2540C /* QuantityMonitorView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -278,10 +287,13 @@
 				A0F10FDC1F90671500732A12 /* BaseModel.swift in Sources */,
 				A0F10FDA1F9066F200732A12 /* InfoModel.swift in Sources */,
 				68755B1C1F904F4C00898284 /* ViewController.swift in Sources */,
+				A03DBEA71F94ABB900F2540C /* QuantityMonitorView.swift in Sources */,
 				68755B221F904F4C00898284 /* Gdims.xcdatamodeld in Sources */,
+				A03DBEA51F94A86000F2540C /* DisasterView.swift in Sources */,
 				68755B1A1F904F4C00898284 /* AppDelegate.swift in Sources */,
 				A0F10FDE1F90674C00732A12 /* Api.swift in Sources */,
 				A0F10FE01F90677300732A12 /* UserDefaultUtils.swift in Sources */,
+				A025761E1F95B7B800539A16 /* MacroInfoModel.swift in Sources */,
 				A0F10FD81F9066CD00732A12 /* InfoRealm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +432,7 @@
 			baseConfigurationReference = 1CCECCEC1803E61786B8B4BA /* Pods-Gdims.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X75YXM4C3;
 				INFOPLIST_FILE = Gdims/Info.plist;
@@ -437,6 +450,7 @@
 			baseConfigurationReference = 64D376D776F5A7C86817B200 /* Pods-Gdims.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X75YXM4C3;
 				INFOPLIST_FILE = Gdims/Info.plist;
