@@ -18,8 +18,21 @@ class Api{
         self.ports = "8090";
     }
     
+    // 登录
     func getLoginUrl() -> String{
         let url = "http://"+ip+":"+port+"/meteor/findFunCfg.do"
+        return url
+    }
+    
+    // 灾害点
+    func getMacroUrl() -> String {
+        let url = "http://"+ip+":"+port+"/meteor/findMacro.do"
+        return url
+    }
+    
+    // 灾害点的监测点
+    func getMonitorUrl() -> String {
+        let url = "http://"+ip+":"+port+"/meteor/findMonitor.do"
         return url
     }
     

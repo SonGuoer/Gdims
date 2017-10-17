@@ -10,7 +10,6 @@ import UIKit
 import CoreLocation
 class HomepageView: UIViewController,CLLocationManagerDelegate  {
     @IBOutlet weak var gpsDate: UILabel!
-    
     @IBOutlet weak var location: UIView!
     @IBOutlet weak var gdims: UIView!
     @IBOutlet weak var callPhone: UIView!
@@ -19,14 +18,21 @@ class HomepageView: UIViewController,CLLocationManagerDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         setStatusBarBackgroundColor(color: .black)
+        
         callPhone.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(callAction))
         tapGesture.numberOfTapsRequired = 1
         callPhone.addGestureRecognizer(tapGesture)
+        
         location.isUserInteractionEnabled = true
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction2))
-        tapGesture.numberOfTapsRequired = 1
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(locationAction))
+        tapGesture2.numberOfTapsRequired = 1
         location.addGestureRecognizer(tapGesture2)
+        
+        gdims.isUserInteractionEnabled = true
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(showDisasterAction))
+        tapGesture3.numberOfTapsRequired = 1
+        gdims.addGestureRecognizer(tapGesture3)
     }
 
 
@@ -73,10 +79,18 @@ class HomepageView: UIViewController,CLLocationManagerDelegate  {
 //MARK: 点击事件
 extension HomepageView{
     
-    @objc fileprivate func tapGestureAction(){
+    @objc fileprivate func showDisasterAction(){
+        //跳转页面
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "DisasterView") as! DisasterView
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func callAction(){
       UIApplication.shared.openURL(URL(string: "telprompt://10086")!)
     }
-    @objc fileprivate func tapGestureAction2(){
+    
+    @objc fileprivate func locationAction(){
         //设置定位服务管理器代理
         locationManager.delegate = self
         //设置定位进度
@@ -91,6 +105,6 @@ extension HomepageView{
             locationManager.startUpdatingLocation()
             print("定位开始")
         }
-
     }
+    
 }

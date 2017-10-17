@@ -2,7 +2,7 @@
 //  BaseModel.swift
 //  GdimsIOS
 //
-//  Created by 包宏燕 on 2017/10/11.
+//  Created by 李青松 on 2017/10/11.
 //  Copyright © 2017年 bhy. All rights reserved.
 //
 
