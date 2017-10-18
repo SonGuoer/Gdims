@@ -29,21 +29,11 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         //        步骤一：获取总代理和托管对象总管
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObectContext = appDelegate.persistentContainer.viewContext
-        //网络请求
-        macroRequst()
-        monitorRequst()
-        self.myTableView = UITableView()
-        self.myTableView!.frame = CGRect(x: 0, y: 80, width: Swidth, height: Sheight-20)
-        self.myTableView!.delegate = self
-        self.myTableView!.dataSource = self
-        self.myTableView!.tableFooterView = UIView()
-        self.myTableView!.separatorStyle = .none
-        self.view.addSubview(self.myTableView!)
-
-     
+        readMacro()
+      
     }
     
-    private func readMonitor(text: String) {
+    private func readMonitor() {
         //        步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Monitor")
         
@@ -52,6 +42,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Monitor]
 //            print(fetchedResults!)
             for one in fetchedResults! {
+                
                 print("单位：名称：\(one.monPointName!) ")
             }
         } catch  {
@@ -61,13 +52,21 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     private func readMacro() {
         //        步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Macro")
-        
         //        步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Macro]
                         print(fetchedResults!)
             for one in fetchedResults! {
-                print("名称：\(one.name!) ")
+                if one.name == ""{
+                   
+                    //网络请求
+                    macroRequst()
+                    monitorRequst()
+                }else{
+                    self.array += [one.name!]
+                    self.setTable()
+                }
+                
             }
         } catch  {
             fatalError("获取失败")
@@ -76,6 +75,16 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     /*
      灾害点请求
      */
+    fileprivate func setTable() {
+        self.myTableView = UITableView()
+        self.myTableView!.frame = CGRect(x: 0, y: 80, width: self.Swidth, height: self.Sheight-20)
+        self.myTableView!.delegate = self
+        self.myTableView!.dataSource = self
+        self.myTableView!.tableFooterView = UIView()
+        self.myTableView!.separatorStyle = .none
+        self.view.addSubview(self.myTableView!)
+    }
+    
     func macroRequst()  {
         url = "http://183.230.108.112:8099/meteor/findMacro.do?mobile=15702310784&&imei=0"
         Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
@@ -97,11 +106,12 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 macro.setValue(forecast.name, forKey: "name")
                 macro.setValue(forecast.unifiedNumber, forKey: "unifiedNumber")
             }
+         
             //        步骤四：保存entity到托管对象中。如果保存失败，进行处理
             do {
                 try self.managedObectContext.save()
                 print("保存成功")
-                self.readMacro()
+                self.setTable()
             } catch  {
                 fatalError("无法保存")
             }
