@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Macro" representedClassName="Macro" syncable="YES" codeGenerationType="class"/>
+    <entity name="Macro" representedClassName="Macro" syncable="YES" codeGenerationType="class">
+        <attribute name="disasterType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="legalR" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="macroscopicPhenomenon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unifiedNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Monitor" representedClassName="Monitor" syncable="YES" codeGenerationType="class">
         <attribute name="dimension" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="instrumentConstant" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,7 +26,7 @@
         <attribute name="ypoint" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Monitor" positionX="-63" positionY="-18" width="128" height="30"/>
-        <element name="Macro" positionX="-63" positionY="-27" width="128" height="45"/>
+        <element name="Macro" positionX="-63" positionY="-27" width="128" height="150"/>
+        <element name="Monitor" positionX="151" positionY="-27" width="128" height="253"/>
     </elements>
 </model>

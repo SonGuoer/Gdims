@@ -22,9 +22,15 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var getClickNum:Int?
     var array = [String]()
     var url = ""
-    
+    var managedObectContext: NSManagedObjectContext!
+    var appDelegate: AppDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //        步骤一：获取总代理和托管对象总管
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        managedObectContext = appDelegate.persistentContainer.viewContext
+        macroRequst()
+        monitorRequst()
         self.myTableView = UITableView()
         self.myTableView!.frame = CGRect(x: 0, y: 80, width: Swidth, height: Sheight-20)
         self.myTableView!.delegate = self
@@ -32,47 +38,40 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         self.myTableView!.tableFooterView = UIView()
         self.myTableView!.separatorStyle = .none
         self.view.addSubview(self.myTableView!)
-        //        macroRequest()
-        monitorRequst()
+
+     
     }
     
-    private func saveName(text: String) {
-        //        步骤一：获取总代理和托管对象总管
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let managedObectContext = appDelegate.persistentContainer.viewContext
-        
-        //        步骤二：建立一个entity
-        let entity = NSEntityDescription.entity(forEntityName: "Monitor", in: managedObectContext)
-        
-        let person = NSManagedObject(entity: entity!, insertInto: managedObectContext)
-        
-        //        步骤三：保存文本框中的值到person
-        person.setValue(text, forKey: "monPointName")
-        
-        //        步骤四：保存entity到托管对象中。如果保存失败，进行处理
-        do {
-            try managedObectContext.save()
-            print("保存成功")
-        } catch  {
-            fatalError("无法保存")
-        }
-        
+    private func readMonitor(text: String) {
         //        步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Monitor")
         
         //        步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Monitor]
-            print(fetchedResults)
+//            print(fetchedResults!)
             for one in fetchedResults! {
-                print(one.monPointName)
+                print("单位：名称：\(one.monPointName!) ")
             }
         } catch  {
             fatalError("获取失败")
         }
     }
-    
+    private func readMacro() {
+        //        步骤二：建立一个获取的请求
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Macro")
+        
+        //        步骤三：执行请求
+        do {
+            let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Macro]
+                        print(fetchedResults!)
+            for one in fetchedResults! {
+                print("单位：名称：\(one.name!) ")
+            }
+        } catch  {
+            fatalError("获取失败")
+        }
+    }
     /*
      灾害点请求
      */
@@ -82,34 +81,117 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             let myResponse = response.result.value
             //            print(myResponse!.info!)
             let extractedExpr: [MacroInfoModel]? = Mapper<MacroInfoModel>().mapArray(JSONString: (myResponse?.info)!)
-            
+            self.macroDetel()
             for forecast in extractedExpr! {
-                //realm.create(InfoRealm.self, value: forecast, update: true)
-//                self.saveName(text: forecast.name!)
+                   self.array += [forecast.name!]
+                //        步骤二：建立一个entity
+                let entity = NSEntityDescription.entity(forEntityName: "Macro", in: self.managedObectContext)
+                
+                let macro = NSManagedObject(entity: entity!, insertInto: self.managedObectContext)
+                macro.setValue(forecast.disasterType, forKey: "disasterType")
+                macro.setValue(forecast.latitude, forKey: "latitude")
+                macro.setValue(forecast.legalR, forKey: "legalR")
+                macro.setValue(forecast.longitude, forKey: "longitude")
+                macro.setValue(forecast.macroscopicPhenomenon, forKey: "macroscopicPhenomenon")
+                macro.setValue(forecast.name, forKey: "name")
+                macro.setValue(forecast.unifiedNumber, forKey: "unifiedNumber")
+            }
+            //        步骤四：保存entity到托管对象中。如果保存失败，进行处理
+            do {
+                try self.managedObectContext.save()
+                print("保存成功")
+                self.readMacro()
+            } catch  {
+                fatalError("无法保存")
             }
             
-            //}
-            //print("数据库路径: \(realm.configuration.fileURL)")
         }
     }
     
     /*
      灾害点的监测点请求
      */
+    fileprivate func monitorDetel() {
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest()
+        fetchRequest.fetchLimit = 10
+        fetchRequest.fetchOffset = 0
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Monitor", in: self.managedObectContext)
+        fetchRequest.entity = entity
+        
+        fetchRequest.predicate = nil
+        do {
+            let fetchedObjects = try self.managedObectContext.fetch(fetchRequest) as! [Monitor]
+            for one: Monitor in fetchedObjects {
+                self.managedObectContext.delete(one)
+                print("删除成功")
+                self.appDelegate.saveContext()
+            }
+            
+        } catch  {
+            let nserror = error as NSError
+            fatalError("查询错误： \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    fileprivate func macroDetel() {
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest()
+        fetchRequest.fetchLimit = 10
+        fetchRequest.fetchOffset = 0
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Macro", in: self.managedObectContext)
+        fetchRequest.entity = entity
+        fetchRequest.predicate = nil
+        do {
+            let fetchedObjects = try self.managedObectContext.fetch(fetchRequest) as! [Macro]
+            for one: Macro in fetchedObjects {
+                self.managedObectContext.delete(one)
+                print("删除成功")
+                self.appDelegate.saveContext()
+            }
+            
+        } catch  {
+            let nserror = error as NSError
+            fatalError("查询错误： \(nserror), \(nserror.userInfo)")
+        }
+    }
     func monitorRequst()  {
         url = "http://183.230.108.112:8099/meteor/findMonitor.do?mobile=15702310784&&imei=0"
         Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
             let myResponse = response.result.value
-            //            print(myResponse!.info!)
             let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
-            
+           self.monitorDetel()
+   
             for forecast in extractedExpr! {
-                //realm.create(InfoRealm.self, value: forecast, update: true)
-                self.saveName(text: forecast.monPointName!)
+             
+                //        步骤二：建立一个entity
+                let entity = NSEntityDescription.entity(forEntityName: "Monitor", in: self.managedObectContext)
+                
+                let monitor = NSManagedObject(entity: entity!, insertInto: self.managedObectContext)
+                
+                //        步骤三：保存文本框中的值到monitor
+                monitor.setValue(forecast.dimension, forKey: "dimension")
+                monitor.setValue(forecast.instrumentConstant, forKey: "instrumentConstant")
+                monitor.setValue(forecast.instrumentNumber, forKey: "instrumentNumber")
+                monitor.setValue(forecast.legalR, forKey: "legalR")
+                monitor.setValue(forecast.monAngle, forKey: "monAngle")
+                monitor.setValue(forecast.monContent, forKey: "monContent")
+                monitor.setValue(forecast.monDirection, forKey: "monDirection")
+                monitor.setValue(forecast.monPointLocation, forKey: "monPointLocation")
+                monitor.setValue(forecast.monPointName, forKey: "monPointName")
+                monitor.setValue(forecast.monPointNumber, forKey: "monPointNumber")
+                monitor.setValue(forecast.monType, forKey: "monType")
+                monitor.setValue(forecast.unifiedNumber, forKey: "unifiedNumber")
+                monitor.setValue(forecast.xpoint, forKey: "xpoint")
+                monitor.setValue(forecast.ypoint, forKey: "ypoint")
             }
-            
-            //}
-            //print("数据库路径: \(realm.configuration.fileURL)")
+            do {
+                try self.managedObectContext.save()
+                print("保存成功")
+            } catch  {
+                fatalError("无法保存")
+            }
+ 
         }
     }
 
