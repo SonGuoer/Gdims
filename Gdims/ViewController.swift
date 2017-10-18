@@ -39,7 +39,6 @@ class ViewController: UIViewController {
             self.portInput.text = userDefault.getUser(forKey: "ports")
             self.phoneInput.text = userDefault.getUser(forKey: "phoneNum")
         }
-         macroRequst()
     }
     
     override func didReceiveMemoryWarning() {
@@ -143,31 +142,35 @@ extension ViewController: UITextFieldDelegate {
         })
         return true
     }
-    func textFieldDidBeginEditing(textView:UITextField) {
-        //view弹起跟随键盘，高可根据自己定义
-        UIView.animate(withDuration: 0.4, animations: {
-            self.view.frame.origin.y = -150
-        })
+    
+    //view弹起跟随键盘，高可根据自己定义
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let ipframe = ipView.frame
+        let portframe = portView.frame
+        let phoneframe = phoneView.frame
+        
+        /*
+         35:键盘上tabbar高度
+         52:两个textField之间的距离
+         42:textField的高度
+         */
+        if textField.isEqual(ipInput){
+            UIView.animate(withDuration: 0.4, animations: {
+                //            self.view.frame.origin.y = -100
+                self.ipView.frame.origin.y = ipframe.origin.y - 35
+            })
+        } else if textField.isEqual(portInput){
+            UIView.animate(withDuration: 0.4, animations: {
+                self.ipView.frame.origin.y = ipframe.origin.y - 35 - 52
+                self.portView.frame.origin.y = portframe.origin.y - 35 - 52
+            })
+        } else if textField.isEqual(phoneInput){
+            UIView.animate(withDuration: 0.4, animations: {
+                self.ipView.frame.origin.y = ipframe.origin.y - 52 - 42
+                self.portView.frame.origin.y = portframe.origin.y - 52  - 42
+                self.phoneView.frame.origin.y = phoneframe.origin.y - 52 - 42
+            })
+        }
     }
-         func macroRequst()  {
-                url = "http://183.230.108.112:8099/meteor/findMonitor.do?mobile=15702310784&&imei=0"
-                Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
-                    let myResponse = response.result.value
-                    print(myResponse!.info!)
-                    let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
-                   
-                    print( extractedExpr?.count)
-//                    let realm = try! Realm()
-//                    try! realm.write {
-                        for forecast in extractedExpr! {
-//                        realm.create(InfoRealm.self, value: forecast, update: true)
-                            if forecast.unifiedNumber == "5001010000520201"{
-                                print( forecast.monPointName!)
-                            }
-                        }
-//                   }
-//                    print("数据库路径: \(realm.configuration.fileURL)")
-                }
-            }
     
 }
