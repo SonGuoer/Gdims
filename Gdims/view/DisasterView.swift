@@ -29,6 +29,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         //        步骤一：获取总代理和托管对象总管
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObectContext = appDelegate.persistentContainer.viewContext
+        //网络请求
         macroRequst()
         monitorRequst()
         self.myTableView = UITableView()
@@ -66,7 +67,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Macro]
                         print(fetchedResults!)
             for one in fetchedResults! {
-                print("单位：名称：\(one.name!) ")
+                print("名称：\(one.name!) ")
             }
         } catch  {
             fatalError("获取失败")
