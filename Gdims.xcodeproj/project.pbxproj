@@ -16,7 +16,6 @@
 		A025761E1F95B7B800539A16 /* MacroInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025761D1F95B7B800539A16 /* MacroInfoModel.swift */; };
 		A03DBEA51F94A86000F2540C /* DisasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03DBEA41F94A86000F2540C /* DisasterView.swift */; };
 		A03DBEA71F94ABB900F2540C /* QuantityMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03DBEA61F94ABB900F2540C /* QuantityMonitorView.swift */; };
-		A0F10FD81F9066CD00732A12 /* InfoRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FD71F9066CD00732A12 /* InfoRealm.swift */; };
 		A0F10FDA1F9066F200732A12 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FD91F9066F200732A12 /* InfoModel.swift */; };
 		A0F10FDC1F90671500732A12 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FDB1F90671500732A12 /* BaseModel.swift */; };
 		A0F10FDE1F90674C00732A12 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F10FDD1F90674C00732A12 /* Api.swift */; };
@@ -40,7 +39,6 @@
 		A025761D1F95B7B800539A16 /* MacroInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroInfoModel.swift; sourceTree = "<group>"; };
 		A03DBEA41F94A86000F2540C /* DisasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisasterView.swift; sourceTree = "<group>"; };
 		A03DBEA61F94ABB900F2540C /* QuantityMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityMonitorView.swift; sourceTree = "<group>"; };
-		A0F10FD71F9066CD00732A12 /* InfoRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRealm.swift; sourceTree = "<group>"; };
 		A0F10FD91F9066F200732A12 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		A0F10FDB1F90671500732A12 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		A0F10FDD1F90674C00732A12 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 		A0F10FD41F90667300732A12 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				A0F10FD71F9066CD00732A12 /* InfoRealm.swift */,
 				A0F10FD91F9066F200732A12 /* InfoModel.swift */,
 				A0F10FDB1F90671500732A12 /* BaseModel.swift */,
 				A025761D1F95B7B800539A16 /* MacroInfoModel.swift */,
@@ -238,9 +235,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper+Realm/ObjectMapper_Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -248,9 +242,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper_Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,7 +285,6 @@
 				A0F10FDE1F90674C00732A12 /* Api.swift in Sources */,
 				A0F10FE01F90677300732A12 /* UserDefaultUtils.swift in Sources */,
 				A025761E1F95B7B800539A16 /* MacroInfoModel.swift in Sources */,
-				A0F10FD81F9066CD00732A12 /* InfoRealm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +426,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X75YXM4C3;
 				INFOPLIST_FILE = Gdims/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nandi.Gdims;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -454,7 +444,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X75YXM4C3;
 				INFOPLIST_FILE = Gdims/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nandi.Gdims;
 				PRODUCT_NAME = "$(TARGET_NAME)";

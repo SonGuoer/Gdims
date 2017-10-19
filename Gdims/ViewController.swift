@@ -11,7 +11,6 @@ import AlamofireObjectMapper
 import Alamofire
 import ObjectMapper
 import Toast_Swift
-import RealmSwift
 class ViewController: UIViewController {
     @IBOutlet weak var ipView: UIView!
     @IBOutlet weak var portView: UIView!
@@ -58,6 +57,12 @@ class ViewController: UIViewController {
         phoneNum = phoneInput.text!.trimmingCharacters(in: .whitespaces)
         ips = ipInput.text!.trimmingCharacters(in: .whitespaces)
         ports = portInput.text!.trimmingCharacters(in: .whitespaces)
+        if phoneNum != userDefault.getUser(forKey: "phoneNum"){
+            print("改变了")
+        userDefault.putUser(text: "yChange", forKey: "isChange")
+        }else{
+        userDefault.putUser(text: "nChange", forKey: "isChange")
+        }
         /*设置存储信息*/
         userDefault.putUser(text: phoneNum, forKey: "phoneNum")
         userDefault.putUser(text:ips, forKey: "ips")

@@ -11,7 +11,6 @@ import AlamofireObjectMapper
 import Alamofire
 import ObjectMapper
 import Toast_Swift
-import RealmSwift
 import CoreData
 class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -21,7 +20,9 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var clickNum: Int?
     var getClickNum: Int?
     var array = [String]()
+    var arrayNum = [String]()
     var url = ""
+    var readMonitorNum:String?
     // 偏好
     var userDefault = UserDefaultUtils()
     var sessionManager: SessionManager?
@@ -36,49 +37,65 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         super.viewDidLoad()
         // 步骤一：获取总代理和托管对象总管
         appDelegate = UIApplication.shared.delegate as! AppDelegate
-        managedObectContext = appDelegate.persistentContainer.viewContext
-        readMacro()
-      
+        if #available(iOS 10.0, *) {
+            managedObectContext = appDelegate.persistentContainer.viewContext
+        } else {
+            // Fallback on earlier versions
+        }
+        if userDefault.getUser(forKey: "isChange")! == "yChange"{
+            //网络请求
+             print(userDefault.getUser(forKey: "isChange")!)
+            macroRequst()
+            monitorRequst()
+        }else{
+             print(userDefault.getUser(forKey: "isChange")!)
+            if userDefault.getUser(forKey: "isSaveMacro") != nil{
+             print("2")
+                readMacro()
+                
+            }else{
+                //网络请求
+                print("3")
+                macroRequst()
+            }
+        }
+
     }
     
-    private func readMonitor() {
+    private func readMonitor(number:String) {
+        print("进入readMonitor")
         //        步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Monitor")
-        
+//         断言
+        let predicates = NSPredicate(format: "unifiedNumber='\(number)'", "")
+        fetchRequest.predicate = predicates
         // 步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Monitor]
 //            print(fetchedResults!)
             for one in fetchedResults! {
-                
-                print("单位：名称：\(one.monPointName!) ")
+             print("单位：名称：\(one.monPointName!) ")
             }
         } catch  {
             fatalError("获取失败")
         }
     }
     private func readMacro() {
+        
         // 步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Macro")
         //        步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Macro]
-
+            print("进入macro数据库")
             for one in fetchedResults! {
-                if one.name == ""{
-
-                    //网络请求
-                    macroRequst()
-                    monitorRequst()
-                }else{
                     self.array += [one.name!]
-                    self.setTable()
-                }
-                
+                    self.arrayNum += [one.unifiedNumber!]
             }
         } catch  {
             fatalError("获取失败")
         }
+         self.setTable()
     }
     
 
@@ -106,9 +123,14 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 let myResponse = response.result.value
                 //                        print(myResponse!.info!)
                 let extractedExpr: [MacroInfoModel]? = Mapper<MacroInfoModel>().mapArray(JSONString: (myResponse?.info)!)
-                self.macroDetel()
+                
+                if self.userDefault.getUser(forKey: "isSaveMacro") != nil{
+                    self.macroDetel()
+                }else{
+                   
+                }
+                
                 for forecast in extractedExpr! {
-                    self.array += [forecast.name!]
                     // 步骤二：建立一个entity
                     let entity = NSEntityDescription.entity(forEntityName: "Macro", in: self.managedObectContext)
                     
@@ -121,12 +143,12 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                     macro.setValue(forecast.name, forKey: "name")
                     macro.setValue(forecast.unifiedNumber, forKey: "unifiedNumber")
                 }
-                
                 //        步骤四：保存entity到托管对象中。如果保存失败，进行处理
                 do {
                     try self.managedObectContext.save()
                     print("保存成功")
-                    self.setTable()
+                    self.userDefault.putUser(text:"true", forKey: "isSaveMacro")
+                    self.readMacro()
                 } catch  {
                     fatalError("无法保存")
                 }
@@ -152,7 +174,11 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             let fetchedObjects = try self.managedObectContext.fetch(fetchRequest) as! [Monitor]
             for one: Monitor in fetchedObjects {
                 self.managedObectContext.delete(one)
-                self.appDelegate.saveContext()
+                if #available(iOS 10.0, *) {
+                    self.appDelegate.saveContext()
+                } else {
+                    // Fallback on earlier versions
+                }
             }
         } catch  {
             let nserror = error as NSError
@@ -173,7 +199,11 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             for one: Macro in fetchedObjects {
                 self.managedObectContext.delete(one)
          
-                self.appDelegate.saveContext()
+                if #available(iOS 10.0, *) {
+                    self.appDelegate.saveContext()
+                } else {
+                    // Fallback on earlier versions
+                }
             }
             
         } catch  {
@@ -186,53 +216,42 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      灾害点的监测点请求
      */
     func monitorRequst()  {
-        url = Api.init().getMonitorUrl()
-        // 需要上传的参数集合
-        let parameters = ["mobile": userDefault.getUser(forKey: "phoneNum")!,"imei":"0" ] as [String : Any]
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 15
-        sessionManager = Alamofire.SessionManager(configuration: configuration)
-        
-        sessionManager?.request(url, method: .post, parameters: parameters).responseObject { (response: DataResponse<BaseModel>) in
-            switch response.result {
-            case .success:
-                let myResponse = response.result.value
-                //                        print(myResponse!.info!)
-                let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
-                self.monitorDetel()
-                for forecast in extractedExpr! {
-                    // 步骤二：建立一个entity
-                    let entity = NSEntityDescription.entity(forEntityName: "Macro", in: self.managedObectContext)
-                    
-                    let monitor = NSManagedObject(entity: entity!, insertInto: self.managedObectContext)
-                    
-                    // 步骤三：保存文本框中的值到monitor
-                    monitor.setValue(forecast.dimension, forKey: "dimension")
-                    monitor.setValue(forecast.instrumentConstant, forKey: "instrumentConstant")
-                    monitor.setValue(forecast.instrumentNumber, forKey: "instrumentNumber")
-                    monitor.setValue(forecast.legalR, forKey: "legalR")
-                    monitor.setValue(forecast.monAngle, forKey: "monAngle")
-                    monitor.setValue(forecast.monContent, forKey: "monContent")
-                    monitor.setValue(forecast.monDirection, forKey: "monDirection")
-                    monitor.setValue(forecast.monPointLocation, forKey: "monPointLocation")
-                    monitor.setValue(forecast.monPointName, forKey: "monPointName")
-                    monitor.setValue(forecast.monPointNumber, forKey: "monPointNumber")
-                    monitor.setValue(forecast.monType, forKey: "monType")
-                    monitor.setValue(forecast.unifiedNumber, forKey: "unifiedNumber")
-                    monitor.setValue(forecast.xpoint, forKey: "xpoint")
-                    monitor.setValue(forecast.ypoint, forKey: "ypoint")
-                }
-                do {
-                    try self.managedObectContext.save()
-                    print("保存成功")
-                } catch  {
-                    fatalError("无法保存")
-                }
+        url = "\(Api.init().getMonitorUrl())?mobile=\(userDefault.getUser(forKey: "phoneNum")!)&&imei=0"
+        Alamofire.request(url).responseObject { (response: DataResponse<BaseModel>) in
+            let myResponse = response.result.value
+            let extractedExpr: [InfoModel]? = Mapper<InfoModel>().mapArray(JSONString: (myResponse?.info)!)
+            self.monitorDetel()
+            
+            for forecast in extractedExpr! {
                 
+                //        步骤二：建立一个entity
+                let entity = NSEntityDescription.entity(forEntityName: "Monitor", in: self.managedObectContext)
                 
-            case .failure( _):
-                self.view.makeToast("数据请求失败", duration: 1, position: .center)
+                let monitor = NSManagedObject(entity: entity!, insertInto: self.managedObectContext)
+                
+                //        步骤三：保存文本框中的值到monitor
+                monitor.setValue(forecast.dimension, forKey: "dimension")
+                monitor.setValue(forecast.instrumentConstant, forKey: "instrumentConstant")
+                monitor.setValue(forecast.instrumentNumber, forKey: "instrumentNumber")
+                monitor.setValue(forecast.legalR, forKey: "legalR")
+                monitor.setValue(forecast.monAngle, forKey: "monAngle")
+                monitor.setValue(forecast.monContent, forKey: "monContent")
+                monitor.setValue(forecast.monDirection, forKey: "monDirection")
+                monitor.setValue(forecast.monPointLocation, forKey: "monPointLocation")
+                monitor.setValue(forecast.monPointName, forKey: "monPointName")
+                monitor.setValue(forecast.monPointNumber, forKey: "monPointNumber")
+                monitor.setValue(forecast.monType, forKey: "monType")
+                monitor.setValue(forecast.unifiedNumber, forKey: "unifiedNumber")
+                monitor.setValue(forecast.xpoint, forKey: "xpoint")
+                monitor.setValue(forecast.ypoint, forKey: "ypoint")
             }
+            do {
+                try self.managedObectContext.save()
+                print("保存成功")
+            } catch  {
+                fatalError("无法保存")
+            }
+            
         }
     }
 
@@ -306,6 +325,9 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @objc func tapGesture(tap:UITapGestureRecognizer){
         clickNum = tap.view?.tag
+        readMonitorNum = arrayNum[clickNum!]
+        print(readMonitorNum!)
+        readMonitor(number: readMonitorNum!)
         if getClickNum == clickNum{
             clickNum = nil
         }

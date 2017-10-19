@@ -3,7 +3,6 @@ use_frameworks!
 
 target ‘Gdims’ do
         pod 'AlamofireObjectMapper' 
-	pod  'ObjectMapper+Realm'
 	pod 'Toast-Swift'
 end
 
