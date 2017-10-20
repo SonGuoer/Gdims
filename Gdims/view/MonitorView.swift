@@ -10,6 +10,18 @@ import UIKit
 
 class MonitorView: UIViewController {
     
+    // 灾害点名称
+    @IBOutlet weak var disasterName: UILabel!
+    // 监测点名称
+    @IBOutlet weak var monitorName: UILabel!
+    // 发生日期
+    @IBOutlet weak var happenDate: UILabel!
+    // 定量监测名称
+    @IBOutlet weak var inputName: UILabel!
+    // 输入框
+    @IBOutlet weak var inputNum: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
