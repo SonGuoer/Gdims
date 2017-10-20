@@ -22,6 +22,8 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var array = [String]()
     var arrayNum = [String]()
     var monitorArray = [String]()
+    //排序后的监测点
+    var monitors = [String]()
     var url = ""
     var readMonitorNum: String?
     // 偏好
@@ -303,11 +305,12 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         if indexPath.row == 0 {
             cell?.textLabel?.text = "宏观观测"
         } else{
+            self.monitors = []
             // 对监测点数组排序
-            var monitor = monitorArray.sorted()
-            for index in 1...monitor.count{
+            self.monitors = monitorArray.sorted()
+            for index in 1...monitors.count{
                 if indexPath.row == index{
-                    cell?.textLabel?.text = monitor[index-1]
+                    cell?.textLabel?.text = monitors[index-1]
                 }
             }
         }
@@ -320,8 +323,9 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      选择cell
      */
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //跳转页面
         print("indexPath: \(indexPath.row)")
+        self.myTableView!.deselectRow(at: indexPath, animated: true)
+        //跳转页面
         if indexPath.row == 0 {
             //宏观观测页面
             
@@ -335,6 +339,17 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
     }
 
+    /*
+     当触发segue的时候会调用此方法
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MonitorView" {
+            let vc = segue.destination as! MonitorView
+            let array1 = sender as? Array<String>
+            vc.names = array1!
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         print("4-")
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Swidth-20, height: 60))

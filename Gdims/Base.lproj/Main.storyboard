@@ -200,6 +200,9 @@
                                     <navigationItem title="定量监测" id="2d6-sx-CVw">
                                         <barButtonItem key="leftBarButtonItem" image="back" style="done" id="uue-Jt-Zkk">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="dismissView:" destination="eHP-aN-8ED" id="UpO-el-P7Z"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -395,10 +398,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gn2-r1-iF8"/>
                     </view>
+                    <connections>
+                        <outlet property="disasterName" destination="Z0P-ua-y0T" id="Qzc-GA-quj"/>
+                        <outlet property="happenDate" destination="GbU-Tv-x4D" id="a8k-h2-mBJ"/>
+                        <outlet property="inputName" destination="gX2-9U-rVd" id="6UP-Pa-eBf"/>
+                        <outlet property="inputNum" destination="ASH-N7-DjA" id="Tem-xY-4y1"/>
+                        <outlet property="monitorName" destination="5fA-7K-9xx" id="kiI-ka-3lp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaw-nO-fbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="118" y="813"/>
+            <point key="canvasLocation" x="1630" y="813"/>
         </scene>
         <!--Homepage View-->
         <scene sceneID="6Yv-7x-r66">
@@ -597,6 +607,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OKZ-Ht-nLf"/>
                     </view>
+                    <connections>
+                        <segue destination="eHP-aN-8ED" kind="showDetail" identifier="MonitorView" id="D1U-By-T7n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XM-nI-Uwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
