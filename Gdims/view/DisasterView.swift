@@ -260,13 +260,17 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
 
-    // 返回节的个数
+    /*
+     返回节的个数
+     */
     func numberOfSections(in tableView: UITableView) -> Int {
         print("1-")
         return array.count
     }
 
-    // 返回某个节中的行数
+    /*
+     返回某个节中的行数
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("2-")
         //默认至少有一个子项代表“宏观观测”
@@ -284,7 +288,9 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
 
-    // 为表视图单元格提供数据，该方法是必须实现的方法
+    /*
+     为表视图单元格提供数据，该方法是必须实现的方法
+     */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("3-")
         let str = "section"
@@ -305,11 +311,27 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 }
             }
         }
-    
         //设置分隔线
         self.myTableView?.autoAddLineToCell(cell!, indexPath: indexPath, lineColor: lineColor)
-        
         return cell!
+    }
+    
+    /*
+     选择cell
+     */
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //跳转页面
+        print("indexPath: \(indexPath.row)")
+        if indexPath.row == 0 {
+            //宏观观测页面
+            
+        } else{
+            //监测点页面
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "MonitorView") as! MonitorView
+            self.present(vc, animated: true, completion: nil)
+        }
+        
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -181,10 +181,10 @@
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="117.39130434782609"/>
         </scene>
-        <!--Quantity Monitor View-->
+        <!--Monitor View-->
         <scene sceneID="f2D-EJ-Iwn">
             <objects>
-                <viewController restorationIdentifier="QuantityMonitorView" storyboardIdentifier="QuantityMonitorView" id="eHP-aN-8ED" customClass="QuantityMonitorView" customModule="Gdims" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MonitorView" storyboardIdentifier="MonitorView" id="eHP-aN-8ED" customClass="MonitorView" customModule="Gdims" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="biG-Ps-4XV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
