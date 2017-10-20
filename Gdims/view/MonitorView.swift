@@ -12,7 +12,14 @@ class MonitorView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let date = NSDate()
         
+        let timeFormatter = DateFormatter()
+        
+        timeFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        
+        let strNowTime = timeFormatter.string(from: date as Date) as String
+        print(strNowTime)
     }
     
     override func didReceiveMemoryWarning() {

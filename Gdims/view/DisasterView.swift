@@ -326,6 +326,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             //宏观观测页面
             
         } else{
+             indexPath.section
             //监测点页面
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "MonitorView") as! MonitorView
