@@ -42,8 +42,7 @@ class MonitorView: UIViewController,UIImagePickerControllerDelegate,UINavigation
         let strNowTime = timeFormatter.string(from: date as Date) as String
         happenDate.text = strNowTime
     }
-    
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("didFinishPickingImage")
 //        self.imageView.image = info["UIImagePickerControllerEditedImage"] as? UIImage // 保存拍摄（编辑）后的图片到我们的imageView展示
@@ -52,6 +51,7 @@ class MonitorView: UIViewController,UIImagePickerControllerDelegate,UINavigation
         
         picker.dismiss(animated: true, completion: nil) // 退出相机界面
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("imagePickerControllerDidCancel")
         picker.dismiss(animated: true, completion: nil) // 退出相机界面
@@ -88,6 +88,7 @@ class MonitorView: UIViewController,UIImagePickerControllerDelegate,UINavigation
         self.dismiss(animated: true, completion: nil)
     }
 }
+
 //MARK: 点击事件
 extension MonitorView{
     
@@ -102,5 +103,5 @@ extension MonitorView{
         } else {
             print("can't find camera")
         }
-}
+    }
 }
