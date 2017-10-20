@@ -200,6 +200,9 @@
                                     <navigationItem title="定量监测" id="2d6-sx-CVw">
                                         <barButtonItem key="leftBarButtonItem" image="back" style="done" id="uue-Jt-Zkk">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="dismissView:" destination="eHP-aN-8ED" id="UpO-el-P7Z"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -405,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaw-nO-fbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="118" y="813"/>
+            <point key="canvasLocation" x="1630" y="813"/>
         </scene>
         <!--Homepage View-->
         <scene sceneID="6Yv-7x-r66">
@@ -604,6 +607,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OKZ-Ht-nLf"/>
                     </view>
+                    <connections>
+                        <segue destination="eHP-aN-8ED" kind="showDetail" identifier="MonitorView" id="D1U-By-T7n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XM-nI-Uwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

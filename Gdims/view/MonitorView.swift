@@ -21,9 +21,13 @@ class MonitorView: UIViewController {
     // 输入框
     @IBOutlet weak var inputNum: UITextField!
     
+    var names = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        disasterName.text = names[0]
+        monitorName.text = names[1]
         
     }
     
@@ -32,4 +36,10 @@ class MonitorView: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /*
+     释放当前页面
+     */
+    @IBAction func dismissView(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
