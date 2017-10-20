@@ -21,8 +21,9 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var getClickNum: Int?
     var array = [String]()
     var arrayNum = [String]()
+    var monitorArray = [String]()
     var url = ""
-    var readMonitorNum:String?
+    var readMonitorNum: String?
     // 偏好
     var userDefault = UserDefaultUtils()
     var sessionManager: SessionManager?
@@ -44,15 +45,14 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
         if userDefault.getUser(forKey: "isChange")! == "yChange"{
             //网络请求
-             print(userDefault.getUser(forKey: "isChange")!)
+            print(userDefault.getUser(forKey: "isChange")!)
             macroRequst()
             monitorRequst()
         }else{
-             print(userDefault.getUser(forKey: "isChange")!)
+            print(userDefault.getUser(forKey: "isChange")!)
             if userDefault.getUser(forKey: "isSaveMacro") != nil{
-             print("2")
+                print("2")
                 readMacro()
-                
             }else{
                 //网络请求
                 print("3")
@@ -64,33 +64,35 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     private func readMonitor(number:String) {
         print("进入readMonitor")
-        //        步骤二：建立一个获取的请求
+        // 清空数组
+        self.monitorArray = []
+        // 步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Monitor")
-//         断言
+        // 断言
         let predicates = NSPredicate(format: "unifiedNumber='\(number)'", "")
         fetchRequest.predicate = predicates
         // 步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Monitor]
-//            print(fetchedResults!)
             for one in fetchedResults! {
-             print("单位：名称：\(one.monPointName!) ")
+                self.monitorArray += [one.monPointName!]
+                print("单位：名称：\(one.monPointName!) ")
             }
         } catch  {
             fatalError("获取失败")
         }
     }
+    
     private func readMacro() {
-        
         // 步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Macro")
-        //        步骤三：执行请求
+        // 步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Macro]
             print("进入macro数据库")
             for one in fetchedResults! {
-                    self.array += [one.name!]
-                    self.arrayNum += [one.unifiedNumber!]
+                self.array += [one.name!]
+                self.arrayNum += [one.unifiedNumber!]
             }
         } catch  {
             fatalError("获取失败")
@@ -143,7 +145,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                     macro.setValue(forecast.name, forKey: "name")
                     macro.setValue(forecast.unifiedNumber, forKey: "unifiedNumber")
                 }
-                //        步骤四：保存entity到托管对象中。如果保存失败，进行处理
+                // 步骤四：保存entity到托管对象中。如果保存失败，进行处理
                 do {
                     try self.managedObectContext.save()
                     print("保存成功")
@@ -157,7 +159,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                   self.view.makeToast("数据请求失败", duration: 1, position: .center)
             }
            
-            
         }
     }
     
@@ -223,13 +224,12 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             self.monitorDetel()
             
             for forecast in extractedExpr! {
-                
-                //        步骤二：建立一个entity
+                // 步骤二：建立一个entity
                 let entity = NSEntityDescription.entity(forEntityName: "Monitor", in: self.managedObectContext)
                 
                 let monitor = NSManagedObject(entity: entity!, insertInto: self.managedObectContext)
                 
-                //        步骤三：保存文本框中的值到monitor
+                // 步骤三：保存文本框中的值到monitor
                 monitor.setValue(forecast.dimension, forKey: "dimension")
                 monitor.setValue(forecast.instrumentConstant, forKey: "instrumentConstant")
                 monitor.setValue(forecast.instrumentNumber, forKey: "instrumentNumber")
@@ -262,12 +262,17 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     // 返回节的个数
     func numberOfSections(in tableView: UITableView) -> Int {
+        print("1-")
         return array.count
     }
 
     // 返回某个节中的行数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numOfCells = [5,2]
+        print("2-")
+        //默认至少有一个子项代表“宏观观测”
+        var numOfCells = Array(repeating: 1, count: array.count)
+        numOfCells[section] = monitorArray.count+1
+        
         if clickNum == nil{
             return 0
         } else {
@@ -281,6 +286,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     // 为表视图单元格提供数据，该方法是必须实现的方法
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("3-")
         let str = "section"
         var cell = self.myTableView?.dequeueReusableCell(withIdentifier: str)
         if cell == nil {
@@ -288,15 +294,26 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
         cell?.textLabel?.textAlignment = NSTextAlignment.center
         cell?.textLabel?.textColor = textLabelColor
-        cell?.textLabel?.text = "这是第\(indexPath.section+1)个字段,第\(indexPath.row)个cell"
+        if indexPath.row == 0 {
+            cell?.textLabel?.text = "宏观观测"
+        } else{
+            // 对监测点数组排序
+            var monitor = monitorArray.sorted()
+            for index in 1...monitor.count{
+                if indexPath.row == index{
+                    cell?.textLabel?.text = monitor[index-1]
+                }
+            }
+        }
     
-        //设置
+        //设置分隔线
         self.myTableView?.autoAddLineToCell(cell!, indexPath: indexPath, lineColor: lineColor)
         
         return cell!
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        print("4-")
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Swidth-20, height: 60))
         view.backgroundColor = UIColor.white
         //设置文本
@@ -320,6 +337,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        print("5-")
         return 60
     }
 
