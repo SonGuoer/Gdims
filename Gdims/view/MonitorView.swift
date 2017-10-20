@@ -1,5 +1,5 @@
 //
-//  QuantityMonitorView.swift
+//  MonitorView.swift --- 定量监测页面
 //  Gdims
 //
 //  Created by 包宏燕 on 2017/10/16.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class QuantityMonitorView: UIViewController {
+class MonitorView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
     
     override func didReceiveMemoryWarning() {
