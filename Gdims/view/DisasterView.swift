@@ -330,11 +330,12 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             //宏观观测页面
             
         } else{
-             indexPath.section
-            //监测点页面
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "MonitorView") as! MonitorView
-            self.present(vc, animated: true, completion: nil)
+            var senders = Array(repeating: "", count: 2)
+            // 灾害点名称
+            senders[0] = array[indexPath.section]
+            // 监测点名称
+            senders[1] = monitors[indexPath.row-1]
+            self.performSegue(withIdentifier: "MonitorView", sender: senders)
         }
         
     }
