@@ -401,6 +401,7 @@
                     <connections>
                         <outlet property="disasterName" destination="Z0P-ua-y0T" id="Qzc-GA-quj"/>
                         <outlet property="happenDate" destination="GbU-Tv-x4D" id="a8k-h2-mBJ"/>
+                        <outlet property="imageView" destination="PcO-qm-70e" id="1iO-ot-bbn"/>
                         <outlet property="inputName" destination="gX2-9U-rVd" id="6UP-Pa-eBf"/>
                         <outlet property="inputNum" destination="ASH-N7-DjA" id="Tem-xY-4y1"/>
                         <outlet property="monitorName" destination="5fA-7K-9xx" id="kiI-ka-3lp"/>

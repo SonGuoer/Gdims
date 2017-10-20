@@ -18,6 +18,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>ObjectMapper+Realm.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -31,6 +36,16 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
+		</dict>
+		<key>Realm.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>RealmSwift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>Toast-Swift.xcscheme</key>
 		<dict>
