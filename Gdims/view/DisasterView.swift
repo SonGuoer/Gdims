@@ -1,5 +1,5 @@
 //
-//  DisasterView.swift
+//  DisasterView.swift --- 灾害点监测页面
 //  Gdims
 //
 //  Created by 包宏燕 on 2017/10/16.
@@ -19,10 +19,14 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     let Sheight = UIScreen.main.bounds.size.height
     var clickNum: Int?
     var getClickNum: Int?
+    // 灾害点名称集合
     var array = [String]()
+    // 灾害点编号集合
     var arrayNum = [String]()
+    // 宏观现象
+    var phenos: String?
     var monitorArray = [String]()
-    //排序后的监测点
+    // 排序后的监测点
     var monitors = [String]()
     var url = ""
     var readMonitorNum: String?
@@ -66,7 +70,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     private func readMonitor(number:String) {
         print("进入readMonitor")
-        // 清空数组
+        // 清空监测点数组
         self.monitorArray = []
         // 步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Monitor")
@@ -86,15 +90,20 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     private func readMacro() {
+        // 清空
+        self.phenos = ""
         // 步骤二：建立一个获取的请求
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Macro")
         // 步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Macro]
             print("进入macro数据库")
+            
             for one in fetchedResults! {
+                print("macro数据: \(one.macroscopicPhenomenon)")
                 self.array += [one.name!]
                 self.arrayNum += [one.unifiedNumber!]
+                self.phenos = one.macroscopicPhenomenon!
             }
         } catch  {
             fatalError("获取失败")
@@ -102,7 +111,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
          self.setTable()
     }
     
-
     fileprivate func setTable() {
         self.myTableView = UITableView()
         self.myTableView!.frame = CGRect(x: 0, y: 80, width: self.Swidth, height: self.Sheight-20)
@@ -266,7 +274,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      返回节的个数
      */
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("1-")
         return array.count
     }
 
@@ -274,7 +281,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      返回某个节中的行数
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("2-")
         //默认至少有一个子项代表“宏观观测”
         var numOfCells = Array(repeating: 1, count: array.count)
         numOfCells[section] = monitorArray.count+1
@@ -294,7 +300,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      为表视图单元格提供数据，该方法是必须实现的方法
      */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("3-")
         let str = "section"
         var cell = self.myTableView?.dequeueReusableCell(withIdentifier: str)
         if cell == nil {
@@ -328,6 +333,11 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         //跳转页面
         if indexPath.row == 0 {
             //宏观观测页面
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "MacroView") as! MacroView
+            //传值
+            vc.phenosStr = phenos
+            self.present(vc, animated: true, completion: nil)
             
         } else{
             var senders = Array(repeating: "", count: 2)
@@ -352,7 +362,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        print("4-")
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Swidth-20, height: 60))
         view.backgroundColor = UIColor.white
         //设置文本
@@ -376,7 +385,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        print("5-")
         return 60
     }
 

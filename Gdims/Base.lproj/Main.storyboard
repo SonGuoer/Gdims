@@ -616,10 +616,10 @@
             </objects>
             <point key="canvasLocation" x="1630" y="117"/>
         </scene>
-        <!--View Controller-->
+        <!--Macro View-->
         <scene sceneID="Wtk-d0-hyb">
             <objects>
-                <viewController id="QYg-2x-Umg" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MacroView" storyboardIdentifier="MacroView" id="QYg-2x-Umg" customClass="MacroView" customModule="Gdims" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Qr-xc-Ryb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -635,13 +635,98 @@
                                     <navigationItem title="宏观观测" id="g0J-CI-ghx">
                                         <barButtonItem key="leftBarButtonItem" image="back" style="done" id="b0n-eF-NQs">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="dismissView:" destination="QYg-2x-Umg" id="vAV-42-m3n"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSs-cD-yiT">
                                 <rect key="frame" x="0.0" y="79" width="375" height="531"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ggp-eO-3YX">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="macroCell" rowHeight="120" id="41g-Rg-Ors" customClass="MacroTableViewCell" customModule="Gdims" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="41g-Rg-Ors" id="7Fb-Tx-M60">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="102" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="picture" translatesAutoresizingMaskIntoConstraints="NO" id="5tV-Ex-92g">
+                                                            <rect key="frame" x="20" y="20" width="80" height="80"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新泉水新湿地" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhD-Pl-Dgj">
+                                                            <rect key="frame" x="112" y="35" width="110.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FvF-En-F3v">
+                                                            <rect key="frame" x="112" y="68.5" width="35" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="35" id="BnE-BG-otn"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                                                            <state key="normal" title="有" image="unchecked">
+                                                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <state key="selected" title="有" image="checked"/>
+                                                        </button>
+                                                        <button opaque="NO" tag="104" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aO9-bJ-eee">
+                                                            <rect key="frame" x="169" y="68.5" width="35" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="35" id="aCk-1q-a7L"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
+                                                            <state key="normal" title="无" image="unchecked">
+                                                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <state key="selected" image="no"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLT-D4-Ike">
+                                                            <rect key="frame" x="315" y="40.5" width="40" height="39"/>
+                                                            <state key="normal" image="camera"/>
+                                                            <connections>
+                                                                <action selector="doCamera:" destination="QYg-2x-Umg" eventType="touchUpInside" id="Wkn-RX-0b0"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="FvF-En-F3v" firstAttribute="leading" secondItem="EhD-Pl-Dgj" secondAttribute="leading" id="GIv-hq-zlM"/>
+                                                        <constraint firstAttribute="centerY" secondItem="5tV-Ex-92g" secondAttribute="centerY" id="HUm-NU-qjt"/>
+                                                        <constraint firstItem="FvF-En-F3v" firstAttribute="centerY" secondItem="aO9-bJ-eee" secondAttribute="centerY" id="Opx-eb-uf5"/>
+                                                        <constraint firstItem="LLT-D4-Ike" firstAttribute="centerY" secondItem="7Fb-Tx-M60" secondAttribute="centerY" id="RWD-KU-o4O"/>
+                                                        <constraint firstItem="aO9-bJ-eee" firstAttribute="leading" secondItem="FvF-En-F3v" secondAttribute="trailing" constant="22" id="XCJ-am-Nze"/>
+                                                        <constraint firstItem="5tV-Ex-92g" firstAttribute="leading" secondItem="7Fb-Tx-M60" secondAttribute="leading" constant="20" id="Ydv-CB-7tK"/>
+                                                        <constraint firstItem="EhD-Pl-Dgj" firstAttribute="top" secondItem="7Fb-Tx-M60" secondAttribute="top" constant="35" id="d4p-PK-tiW"/>
+                                                        <constraint firstItem="EhD-Pl-Dgj" firstAttribute="leading" secondItem="5tV-Ex-92g" secondAttribute="trailing" constant="12" id="dyZ-pU-upC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="LLT-D4-Ike" secondAttribute="trailing" constant="20" id="m9i-gQ-TIm"/>
+                                                        <constraint firstItem="FvF-En-F3v" firstAttribute="top" secondItem="EhD-Pl-Dgj" secondAttribute="bottom" constant="12" id="xDn-oR-H4F"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="myImage" destination="5tV-Ex-92g" id="33U-no-bPv"/>
+                                                    <outlet property="noBtn" destination="aO9-bJ-eee" id="8tf-Uw-snz"/>
+                                                    <outlet property="title" destination="EhD-Pl-Dgj" id="XSK-fk-nPa"/>
+                                                    <outlet property="yesBtn" destination="FvF-En-F3v" id="uVK-bD-acw"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ggp-eO-3YX" firstAttribute="top" secondItem="KSs-cD-yiT" secondAttribute="top" id="KHh-qD-nqH"/>
+                                    <constraint firstItem="ggp-eO-3YX" firstAttribute="leading" secondItem="KSs-cD-yiT" secondAttribute="leading" id="Ra7-F0-d75"/>
+                                    <constraint firstAttribute="trailing" secondItem="ggp-eO-3YX" secondAttribute="trailing" id="qEu-7V-DRK"/>
+                                    <constraint firstAttribute="bottom" secondItem="ggp-eO-3YX" secondAttribute="bottom" id="y1b-e6-dx0"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLs-EH-BHj">
                                 <rect key="frame" x="0.0" y="625" width="375" height="42"/>
@@ -703,6 +788,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JUk-3o-qKg"/>
                     </view>
+                    <connections>
+                        <outlet property="myTableView" destination="ggp-eO-3YX" id="Uv3-LV-o5M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOc-dn-DxY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -714,10 +802,15 @@
         <image name="addpic" width="180" height="180"/>
         <image name="back" width="24" height="24"/>
         <image name="call" width="120" height="120"/>
+        <image name="camera" width="40" height="39"/>
+        <image name="checked" width="12" height="12"/>
         <image name="disaster" width="120" height="120"/>
         <image name="ip" width="32" height="32"/>
         <image name="iphone" width="32" height="32"/>
         <image name="loginbg" width="750" height="1334"/>
+        <image name="no" width="12" height="12"/>
+        <image name="picture" width="80" height="80"/>
         <image name="port" width="32" height="32"/>
+        <image name="unchecked" width="12" height="12"/>
     </resources>
 </document>
