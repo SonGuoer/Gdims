@@ -36,5 +36,10 @@ class Api{
         return url
     }
     
+    //上传监测点监测
+    func getSaveMonDateUrl() ->String {
+    return "http://" + ip + ":" + port + "/meteor/saveMonDate.do";
+    }
+    
 }
 

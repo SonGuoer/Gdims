@@ -57,11 +57,8 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }else{
             print(userDefault.getUser(forKey: "isChange")!)
             if userDefault.getUser(forKey: "isSaveMacro") != nil{
-                print("2")
                 readMacro()
             }else{
-                //网络请求
-                print("3")
                 macroRequst()
             }
         }
@@ -82,7 +79,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Monitor]
             for one in fetchedResults! {
                 self.monitorArray += [one.monPointName!]
-                print("单位：名称：\(one.monPointName!) ")
             }
         } catch  {
             fatalError("获取失败")
@@ -158,7 +154,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 // 步骤四：保存entity到托管对象中。如果保存失败，进行处理
                 do {
                     try self.managedObectContext.save()
-                    print("保存成功")
                     self.userDefault.putUser(text:"true", forKey: "isSaveMacro")
                     self.readMacro()
                 } catch  {
@@ -437,5 +432,7 @@ extension UITableView {
     private func countCell(_ atSection: Int) -> Int {
         return self.numberOfRows(inSection: atSection)
     }
+    
+   
 }
 
