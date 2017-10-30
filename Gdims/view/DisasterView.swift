@@ -53,11 +53,8 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }else{
             print(userDefault.getUser(forKey: "isChange")!)
             if userDefault.getUser(forKey: "isSaveMacro") != nil{
-                print("2")
                 readMacro()
             }else{
-                //网络请求
-                print("3")
                 macroRequst()
             }
         }
@@ -78,7 +75,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Monitor]
             for one in fetchedResults! {
                 self.monitorArray += [one.monPointName!]
-                print("单位：名称：\(one.monPointName!) ")
             }
         } catch  {
             fatalError("获取失败")
@@ -91,7 +87,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         // 步骤三：执行请求
         do {
             let fetchedResults = try managedObectContext.fetch(fetchRequest) as? [Macro]
-            print("进入macro数据库")
             for one in fetchedResults! {
                 self.array += [one.name!]
                 self.arrayNum += [one.unifiedNumber!]
@@ -150,7 +145,6 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 // 步骤四：保存entity到托管对象中。如果保存失败，进行处理
                 do {
                     try self.managedObectContext.save()
-                    print("保存成功")
                     self.userDefault.putUser(text:"true", forKey: "isSaveMacro")
                     self.readMacro()
                 } catch  {
@@ -266,7 +260,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      返回节的个数
      */
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("1-")
+
         return array.count
     }
 
@@ -274,7 +268,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      返回某个节中的行数
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("2-")
+     
         //默认至少有一个子项代表“宏观观测”
         var numOfCells = Array(repeating: 1, count: array.count)
         numOfCells[section] = monitorArray.count+1
@@ -294,7 +288,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
      为表视图单元格提供数据，该方法是必须实现的方法
      */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("3-")
+  
         let str = "section"
         var cell = self.myTableView?.dequeueReusableCell(withIdentifier: str)
         if cell == nil {
@@ -352,7 +346,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        print("4-")
+      
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Swidth-20, height: 60))
         view.backgroundColor = UIColor.white
         //设置文本
@@ -376,7 +370,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        print("5-")
+
         return 60
     }
 
@@ -429,5 +423,7 @@ extension UITableView {
     private func countCell(_ atSection: Int) -> Int {
         return self.numberOfRows(inSection: atSection)
     }
+    
+   
 }
 

@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -353,6 +353,9 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="saveBtn:" destination="eHP-aN-8ED" eventType="touchUpInside" id="8GT-Nd-jLu"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2Z-4p-oOr">
                                         <rect key="frame" x="195" y="0.0" width="165" height="42"/>
@@ -366,6 +369,9 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="postBtn:" destination="eHP-aN-8ED" eventType="touchUpInside" id="hF8-BA-9t8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -404,6 +410,7 @@
                         <outlet property="imageView" destination="PcO-qm-70e" id="1iO-ot-bbn"/>
                         <outlet property="inputName" destination="gX2-9U-rVd" id="6UP-Pa-eBf"/>
                         <outlet property="inputNum" destination="ASH-N7-DjA" id="Tem-xY-4y1"/>
+                        <outlet property="monType" destination="gX2-9U-rVd" id="aV7-Tg-gTr"/>
                         <outlet property="monitorName" destination="5fA-7K-9xx" id="kiI-ka-3lp"/>
                     </connections>
                 </viewController>
