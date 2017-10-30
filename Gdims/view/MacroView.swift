@@ -23,9 +23,6 @@ class MacroView: UIViewController,UITableViewDelegate,UITableViewDataSource,UIIm
         self.myTableView.dataSource = self
         
         arrayPhenos = (phenosStr?.components(separatedBy: ","))!
-        for i in arrayPhenos{
-            print("arrayPhenos: \(i)")
-        }
         
     }
     
