@@ -40,6 +40,9 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     // #e5e5e5
     let lineColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1)
     
+    var myButton: UIButton?
+    var myWindow: UIWindow?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // 步骤一：获取总代理和托管对象总管
@@ -302,6 +305,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
         cell?.textLabel?.textAlignment = NSTextAlignment.center
         cell?.textLabel?.textColor = textLabelColor
+        cell?.textLabel?.font = UIFont.systemFont(ofSize: 20)
         if indexPath.row == 0 {
             cell?.textLabel?.text = "宏观观测"
         } else{
@@ -367,6 +371,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         title.addGestureRecognizer(tap)
         title.text = array[section]
         title.textColor = textLabelColor
+        title.font = UIFont.systemFont(ofSize: 22)
         //设置图标
         let icon = UIImageView(frame: CGRect(x: view.frame.size.width-12, y: 22, width: 10, height: 18))
         icon.image = UIImage(named: "right")
@@ -395,6 +400,17 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         getClickNum = clickNum
     }
 
+    func creatFATButton() {
+        
+    }
+    
+    /*
+     释放当前页面
+     */
+    @IBAction func dismissView(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension UITableView {
