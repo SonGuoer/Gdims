@@ -98,6 +98,13 @@ class MacroView: UIViewController,UITableViewDelegate,UITableViewDataSource,UIIm
     }
     
     /*
+     拨打电话
+     */
+    @IBAction func doCall(_ sender: Any) {
+        
+    }
+    
+    /*
      释放当前页面
      */
     @IBAction func dismissView(_ sender: Any) {

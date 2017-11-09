@@ -12,7 +12,7 @@ import Alamofire
 import ObjectMapper
 import Toast_Swift
 import CoreData
-class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate {
     
     var myTableView: UITableView?
     let Swidth = UIScreen.main.bounds.size.width
@@ -39,9 +39,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     let textLabelColor = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
     // #e5e5e5
     let lineColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1)
-    
-    var myButton: UIButton?
-    var myWindow: UIWindow?
+    var hotlineNum: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +63,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 macroRequst()
             }
         }
-
+        hotlineRequest()
     }
     
     private func readMonitor(number:String) {
@@ -99,7 +97,7 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             print("进入macro数据库")
             
             for one in fetchedResults! {
-                print("macro数据: \(one.macroscopicPhenomenon)")
+                print("macro数据: \(String(describing: one.macroscopicPhenomenon))")
                 self.array += [one.name!]
                 self.arrayNum += [one.unifiedNumber!]
                 self.phenos = one.macroscopicPhenomenon!
@@ -399,9 +397,42 @@ class DisasterView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         myTableView!.reloadData()
         getClickNum = clickNum
     }
-
-    func creatFATButton() {
+    
+    func hotlineRequest() {
+        let url = Api.init().getHotline()
+        Alamofire.request(url).responseObject { (response: DataResponse <hotlineModel>) in
+            switch response.result{
+            case .success(_):
+                if let values = response.result.value{
+                    self.hotlineNum = values.message
+                    print("1--\(String(describing: values.message))")
+                }
+                
+            case .failure(let error):
+                print(error)
+                self.view.makeToast("热线访问失败，请稍后再试", duration: 1, position: .center)
+            }
+        }
+    }
+    
+    /*
+     拨打电话
+     */
+    @IBAction func doCall(_ sender: Any) {
+//        hotlineRequest()
+        let urlString = "tel://"+self.hotlineNum!
+        print("2--\(String(describing: urlString))")
         
+        if let url = URL(string: urlString){
+            //根据iOS系统版本，分别处理
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],completionHandler: {
+                                            (success) in
+                })
+            }else {
+                UIApplication.shared.openURL(url)
+            }
+        }
     }
     
     /*
@@ -449,6 +480,5 @@ extension UITableView {
         return self.numberOfRows(inSection: atSection)
     }
     
-   
 }
 

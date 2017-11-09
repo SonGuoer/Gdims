@@ -13,6 +13,7 @@
 		68755B221F904F4C00898284 /* Gdims.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68755B201F904F4C00898284 /* Gdims.xcdatamodeld */; };
 		68755B241F904F4C00898284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68755B231F904F4C00898284 /* Assets.xcassets */; };
 		68755B271F904F4D00898284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68755B251F904F4D00898284 /* LaunchScreen.storyboard */; };
+		A0250EAF1FAAD13C009317EA /* hotlineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0250EAE1FAAD13C009317EA /* hotlineModel.swift */; };
 		A025761E1F95B7B800539A16 /* MacroInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025761D1F95B7B800539A16 /* MacroInfoModel.swift */; };
 		A03B821B1FA2DFA900F23856 /* MacroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B821A1FA2DFA900F23856 /* MacroTableViewCell.swift */; };
 		A03DBEA51F94A86000F2540C /* DisasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03DBEA41F94A86000F2540C /* DisasterView.swift */; };
@@ -38,6 +39,7 @@
 		68755B261F904F4D00898284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68755B281F904F4D00898284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F3D7687F20D94359096A346 /* Pods_Gdims.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gdims.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0250EAE1FAAD13C009317EA /* hotlineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hotlineModel.swift; sourceTree = "<group>"; };
 		A025761D1F95B7B800539A16 /* MacroInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroInfoModel.swift; sourceTree = "<group>"; };
 		A03B821A1FA2DFA900F23856 /* MacroTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroTableViewCell.swift; sourceTree = "<group>"; };
 		A03DBEA41F94A86000F2540C /* DisasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisasterView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				A0F10FDB1F90671500732A12 /* BaseModel.swift */,
 				A025761D1F95B7B800539A16 /* MacroInfoModel.swift */,
 				A03B821A1FA2DFA900F23856 /* MacroTableViewCell.swift */,
+				A0250EAE1FAAD13C009317EA /* hotlineModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				A0F10FDA1F9066F200732A12 /* InfoModel.swift in Sources */,
 				68755B1C1F904F4C00898284 /* ViewController.swift in Sources */,
 				A03B821B1FA2DFA900F23856 /* MacroTableViewCell.swift in Sources */,
+				A0250EAF1FAAD13C009317EA /* hotlineModel.swift in Sources */,
 				A03DBEA71F94ABB900F2540C /* MonitorView.swift in Sources */,
 				68755B221F904F4C00898284 /* Gdims.xcdatamodeld in Sources */,
 				A03DBEA51F94A86000F2540C /* DisasterView.swift in Sources */,

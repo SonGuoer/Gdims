@@ -204,6 +204,12 @@
                                                 <action selector="dismissView:" destination="eHP-aN-8ED" id="UpO-el-P7Z"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="docall" style="done" id="N10-V5-FJt">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="doCall:" destination="eHP-aN-8ED" id="AjC-Kl-0fw"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -605,6 +611,12 @@
                                                 <action selector="dismissView:" destination="ElQ-TZ-dL6" id="bEF-Xa-ABm"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="docall" style="done" id="k4D-q2-Vk2">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="doCall:" destination="ElQ-TZ-dL6" id="3EB-wZ-xzs"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -646,6 +658,12 @@
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="dismissView:" destination="QYg-2x-Umg" id="vAV-42-m3n"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="docall" style="done" id="pdb-8b-BG2">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="doCall:" destination="QYg-2x-Umg" id="ka3-0F-xHj"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -814,6 +832,7 @@
         <image name="camera" width="40" height="39"/>
         <image name="checked" width="12" height="12"/>
         <image name="disaster" width="120" height="120"/>
+        <image name="docall" width="24" height="24"/>
         <image name="ip" width="32" height="32"/>
         <image name="iphone" width="32" height="32"/>
         <image name="loginbg" width="750" height="1334"/>

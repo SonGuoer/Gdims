@@ -38,6 +38,7 @@ class ViewController: UIViewController {
             self.portInput.text = userDefault.getUser(forKey: "ports")
             self.phoneInput.text = userDefault.getUser(forKey: "phoneNum")
         }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -153,7 +154,7 @@ extension ViewController: UITextFieldDelegate {
         let ipframe = ipView.frame
         let portframe = portView.frame
         let phoneframe = phoneView.frame
-        
+
         /*
          35:键盘上tabbar高度
          52:两个textField之间的距离

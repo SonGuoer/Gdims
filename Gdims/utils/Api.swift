@@ -41,5 +41,10 @@ class Api{
     return "http://" + ip + ":" + port + "/meteor/saveMonDate.do";
     }
     
+    // 获取热线电话号码
+    func getHotline() -> String {
+        return "http://www.cqdzjc.com:8090/meteor/getHelpMobile.do"
+    }
+    
 }
 
